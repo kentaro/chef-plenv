@@ -17,11 +17,12 @@ node.plenv.users do |name|
   user_profile = node.plenv.user_profile_template % name
 
   bash "Add $PATH to plenv into #{user_profile}" do
+    user name
     code <<-COMMAND
 echo '
 export PATH="\$HOME/.plenv/bin:$PATH"
 eval "\$(plenv init -)"
-' >> #{user_profile}
+' >> #{user_profile} && exec $SHELL -l
 COMMAND
     not_if {
       begin
