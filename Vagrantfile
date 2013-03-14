@@ -10,8 +10,14 @@ Vagrant::Config.run do |config|
     chef.add_recipe("chef-plenv")
 
     chef.json = {
-      :versions => ["5.16.3"],
-      :users    => ["vagrant"],
+      :plenv => {
+        :versions              => ["5.16.3"],
+        :users                 => ["vagrant"],
+        :repository            => "git://github.com/tokuhirom/plenv.git",
+        :reference             => "master",
+        :user_home_root        => "/home",
+        :user_profile_template => "/home/%s/.bash_profile",
+      },
     }
   end
 end

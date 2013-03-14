@@ -1,4 +1,4 @@
-include_recipe "default"
+include_recipe "plenv"
 
 node.plenv.users.each do |name|
   node.plenv.versions.each do |version|
