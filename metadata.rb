@@ -1,5 +1,5 @@
 name             "plenv"
-maintainer       "YOUR_COMPANY_NAME"
+maintainer       "Kentaro Kuribayashi"
 maintainer_email "kentarok@gmail.com"
 license          "MIT"
 description      "Chef LWRP for plenv."
