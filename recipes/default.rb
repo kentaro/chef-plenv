@@ -18,7 +18,7 @@ node.plenv.users.each do |name|
   bash "Add $PATH to plenv into #{user_profile}" do
     user name
     code <<-COMMAND
-echo 'p
+echo '
 export PATH="\$HOME/.plenv/bin:$PATH"
 eval "\$(plenv init -)"
 ' >> #{user_profile} && exec $SHELL -l
