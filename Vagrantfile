@@ -7,7 +7,7 @@ Vagrant::Config.run do |config|
 
   config.vm.provision :chef_solo do |chef|
     chef.cookbooks_path = ["../"]
-    chef.add_recipe("chef-plenv")
+    chef.add_recipe("chef-plenv::install")
 
     chef.json = {
       :plenv => {
