@@ -135,17 +135,6 @@ plenv_global "5.16.3" do
 end
 ```
 
-### plenv_global
-
-Set a certain version of perl as globally used version.
-
-```ruby
-plenv_global "5.16.3" do
-  user   "kentaro"
-  action :run
-end
-```
-
 ### plenv_install_cpanm
 
 Installs cpanm.
