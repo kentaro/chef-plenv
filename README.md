@@ -1,4 +1,4 @@
-# chef-plenv Cookbook
+# chef-plenv
 
 Chef cookbook for [plenv](https://metacpan.org/release/App-plenv)
 
