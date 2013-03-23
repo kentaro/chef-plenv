@@ -11,6 +11,7 @@ Vagrant::Config.run do |config|
     chef.run_list = %w[
       recipe[plenv::install]
       recipe[plenv::global]
+      recipe[plenv::install_cpanm]
     ]
 
     chef.json = {
