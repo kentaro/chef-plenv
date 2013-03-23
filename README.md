@@ -163,6 +163,7 @@ Installs a perl module.
 
 ```ruby
 plenv_cpanm "Plack" do
+  version "5.16.3"
   user    "kentaro"
   options "--force --reinstall"
   action :install

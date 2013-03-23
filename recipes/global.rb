@@ -1,5 +1,3 @@
-include_recipe "plenv::install"
-
 node.plenv.users.each do |user|
   name = user["name"] || next
 

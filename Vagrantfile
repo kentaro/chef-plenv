@@ -9,6 +9,7 @@ Vagrant::Config.run do |config|
 
   config.vm.provision :chef_solo do |chef|
     chef.run_list = %w[
+      recipe[plenv]
       recipe[plenv::install]
       recipe[plenv::global]
       recipe[plenv::install_cpanm]
@@ -24,6 +25,14 @@ Vagrant::Config.run do |config|
             :name     =>  "vagrant",
             :versions => [
               {
+                :version       => "5.16.2",
+                :cpanm_options => "--force --reinstall",
+                :modules       => %w[
+                  Plack
+                  Amon2
+                ],
+              },
+              {
                 :version       => "5.16.3",
                 :cpanm_options => "--force --reinstall",
                 :modules       => %w[
@@ -31,7 +40,9 @@ Vagrant::Config.run do |config|
                   Amon2
                 ],
               },
+
             ],
+            :global => "5.16.3"
           }
         ],
       },

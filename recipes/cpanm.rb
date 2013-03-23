@@ -1,5 +1,3 @@
-include_recipe "plenv::install_cpanm"
-
 node.plenv.users.each do |user|
   name     = user["name"]     || next
   versions = user["versions"] || next
@@ -10,6 +8,7 @@ node.plenv.users.each do |user|
 
     modules.each do |mod|
       plenv_cpanm mod do
+        version version["version"]
         user    name
         options opts
         action :install
