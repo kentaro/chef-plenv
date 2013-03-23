@@ -40,7 +40,7 @@ recipe[plenv]
 
 Then use LWRPs in your own recipe.
 
-```
+```ruby
 plenv_install "5.16.3" do
   user   "kentaro"
   action :install
