@@ -1,16 +1,16 @@
-node.plenv.install_pkgs.each do |name|
-  package name do
-    action :install
-  end
+%w[build-essential git].each do |cookbook|
+  include_recipe cookbook
 end
 
-node.plenv.users.each do |name|
+node.plenv.users.each do |user|
+  name = user["name"] || next
+
   git "plenv" do
+    user        name
     repository  node.plenv.repository
     reference   node.plenv.reference
-    action      :sync
     destination "#{node.plenv.user_home_root}/#{name}/.plenv"
-    user        name
+    action      :sync
   end
 
   user_profile = node.plenv.user_profile_template % name
@@ -21,7 +21,7 @@ node.plenv.users.each do |name|
 echo '
 export PATH="\$HOME/.plenv/bin:$PATH"
 eval "\$(plenv init -)"
-' >> #{user_profile} && exec $SHELL -l
+' >> #{user_profile}
 COMMAND
     not_if {
       begin

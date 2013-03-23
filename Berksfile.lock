@@ -1,0 +1,1 @@
+cookbook 'plenv', :path => '/Users/kentaro/dev/github/chef-plenv'

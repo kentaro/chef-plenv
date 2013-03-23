@@ -14,12 +14,18 @@ Vagrant::Config.run do |config|
 
     chef.json = {
       :plenv => {
-        :versions              => ["5.16.3"],
-        :users                 => ["vagrant"],
-        :repository            => "git://github.com/tokuhirom/plenv.git",
-        :reference             => "master",
-        :user_home_root        => "/home",
-        :user_profile_template => "/home/%s/.bash_profile",
+        :repository => "git://github.com/tokuhirom/plenv.git",
+        :reference  => "master",
+        :users      => [
+          {
+            :name     =>  "vagrant",
+            :versions => [
+              {
+                version: "5.16.3",
+              },
+            ],
+          }
+        ],
       },
     }
   end
