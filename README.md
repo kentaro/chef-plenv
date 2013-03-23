@@ -95,8 +95,7 @@ plenv: {
 
 ## Recipes
 
-  * plenv: Installs plenv via Git
-  * plenv::install: Installs perls
+  * plenv::install: Installs plenv and perls
   * plenv::global: Sets a certain version of perl as globally used version
   * plenv::install_cpanm: Installs cpanm command
   * plenv::cpanm: Installs a perl module via cpanm
@@ -107,7 +106,7 @@ If you want to handle the installation manually, just use only `plenv` recipe an
 
 This cookbook provides serveral LWRPs listed below:
 
-  * plenv_install: Runs `plenv install ...`
+  * plenv_install: Installs plenv and runs `plenv install ...`
   * plenv_global: Runs `plenv global ...`
   * plenv_install_cpanm: Runs `plenv install-cpanm`
   * plenv_cpanm: Installs a perl module via cpanm

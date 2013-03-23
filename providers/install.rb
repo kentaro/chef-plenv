@@ -1,5 +1,32 @@
 action :install do
   converge_by("Install perl version #{new_resource.name} using plenv") do
+    git "plenv" do
+      user        new_resource.user
+      repository  node["plenv"]["repository"]
+      reference   node["plenv"]["reference"]
+      destination "#{node["plenv"]["user_home_root"]}/#{new_resource.user}/.plenv"
+      action      :sync
+    end
+
+    user_profile = node["plenv"]["user_profile_template"] % new_resource.user
+
+    bash "Add $PATH to plenv into #{user_profile}" do
+      user new_resource.user
+      code <<-COMMAND
+echo '
+export PATH="\$HOME/.plenv/bin:$PATH"
+eval "\$(plenv init -)"
+' >> #{user_profile}
+COMMAND
+      not_if {
+        begin
+          File.open(user_profile).read.match(/plenv init/)
+        rescue
+          false
+        end
+      }
+    end
+
     bash "plenv install #{new_resource.name}" do
       user        new_resource.user
       environment "HOME" => "#{node["plenv"]["user_home_root"]}/#{new_resource.user}"
