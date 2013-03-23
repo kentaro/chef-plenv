@@ -18,6 +18,11 @@ COMMAND
   end
 end
 
+def initialize(*args)
+  super
+  @action = :install
+end
+
 def whyrun_supported?
   true
 end

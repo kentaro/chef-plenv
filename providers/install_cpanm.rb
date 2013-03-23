@@ -16,6 +16,11 @@ COMMAND
   end
 end
 
+def initialize(*args)
+  super
+  @action = :run
+end
+
 def whyrun_supported?
   true
 end
