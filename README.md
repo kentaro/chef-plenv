@@ -1,6 +1,6 @@
 # chef-plenv
 
-Chef cookbook for [plenv](https://metacpan.org/release/App-plenv)
+Chef cookbook and LWRPs for [plenv](https://metacpan.org/release/App-plenv)
 
 ## Requirements
 
