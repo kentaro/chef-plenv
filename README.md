@@ -45,7 +45,7 @@ Chef cookbook for [plenv](https://metacpan.org/release/App-plenv)
 
 ### Example of `users` attribute
 
-```
+```ruby
 plenv: {
   users: [
     {
