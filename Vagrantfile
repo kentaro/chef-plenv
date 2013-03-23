@@ -10,6 +10,7 @@ Vagrant::Config.run do |config|
   config.vm.provision :chef_solo do |chef|
     chef.run_list = %w[
       recipe[plenv::install]
+      recipe[plenv::global]
     ]
 
     chef.json = {
@@ -21,7 +22,7 @@ Vagrant::Config.run do |config|
             :name     =>  "vagrant",
             :versions => [
               {
-                version: "5.16.3",
+                :version => "5.16.3",
               },
             ],
           }
