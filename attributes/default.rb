@@ -1,7 +1,7 @@
 # `users` hash can be the form below:
 
 # users: [
-#   user: {
+#   {
 #     name: "kentaro",
 #     versions: [
 #       {
@@ -26,15 +26,14 @@
 # ]
 
 default["plenv"]["users"] = []
+default["plenv"]["repository"] = "git://github.com/tokuhirom/plenv.git"
+default["plenv"]["reference"]  = "master"
 
 case platform
-when "redhat","centos","fedora", "amazon", "scientific"
+when "redhat", "centos", "fedora", "amazon", "scientific"
   default['plenv']['user_home_root']        = '/home'
   default['plenv']['user_profile_template'] = '/home/%s/.bash_profile'
-when "debian","ubuntu","suse"
+when "debian", "ubuntu"
   default['plenv']['user_home_root']        = '/home'
   default['plenv']['user_profile_template'] = '/home/%s/.profile'
 end
-
-default["plenv"]["repository"] = "git://github.com/tokuhirom/plenv.git"
-default["plenv"]["reference"]  = "master"

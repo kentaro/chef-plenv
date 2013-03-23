@@ -1,24 +1,21 @@
-chef-plenv Cookbook
-===================
-TODO: Enter the cookbook description here.
+# chef-plenv Cookbook
 
-e.g.
-This cookbook makes your favorite breakfast sandwhich.
+Chef cookbook for [plenv](https://metacpan.org/release/App-plenv)
 
-Requirements
-------------
-TODO: List your cookbook requirements. Be sure to include any requirements this cookbook has on platforms, libraries, other cookbooks, packages, operating systems, etc.
+## Requirements
 
-e.g.
-#### packages
-- `toaster` - chef-plenv needs toaster to brown your bagel.
+### Platforms
 
-Attributes
-----------
-TODO: List you cookbook attributes here.
+  * Debian, Ubuntu
+  * RedHat, CentOS, Fedora, Amazon, Scientific
 
-e.g.
-#### chef-plenv::default
+### Cookbooks
+
+  * [build-essential](http://community.opscode.com/cookbooks/build-essential)
+  * [git](http://community.opscode.com/cookbooks/git)
+
+## Attributes
+
 <table>
   <tr>
     <th>Key</th>
@@ -27,42 +24,167 @@ e.g.
     <th>Default</th>
   </tr>
   <tr>
-    <td><tt>['chef-plenv']['bacon']</tt></td>
-    <td>Boolean</td>
-    <td>whether to include bacon</td>
-    <td><tt>true</tt></td>
+    <td><tt>['plenv']['repository']</tt></td>
+    <td>String</td>
+    <td>Repository URL of plenv</td>
+    <td><tt>git://github.com/tokuhirom/plenv.git</tt></td>
+  </tr>
+  <tr>
+    <td><tt>['plenv']['repository']</tt></td>
+    <td>String</td>
+    <td>Repository URL of plenv</td>
+    <td><tt>git://github.com/tokuhirom/plenv.git</tt></td>
+  </tr>
+  <tr>
+    <td><tt>['plenv']['users']</tt></td>
+    <td>Hash</td>
+    <td>Users and information of Perls to be installed for each users</td>
+    <td><tt>See the example below</tt></td>
   </tr>
 </table>
 
-Usage
------
-#### chef-plenv::default
-TODO: Write usage instructions for each cookbook.
+### Example of `users` attribute
 
-e.g.
-Just include `chef-plenv` in your node's `run_list`:
+```
+plenv: {
+  users: [
+    {
+      name: "kentaro",
+      versions: [
+        {
+          version:         "5.16.3",
+          install_options: "-Dusethreads",
+          cpanm_options:   "--force",
+          moudles: %w[
+            Plack
+            Amon2
+          ],
+        },
+        {
+          version:         "5.14.3",
+          install_options: "-Dusethreads",
+          cpanm_options:   "--force",
+          moudles: %w[
+            Mojolicious
+          ],
+        },
+      ],
 
-```json
-{
-  "name":"my_node",
-  "run_list": [
-    "recipe[chef-plenv]"
+      global: "5.16.3",
+    },
+
+    {
+      name: "studio3104",
+      versions: [
+        {
+          # This version will be treated as global if `global` option not set
+          version:         "5.16.3",
+
+          install_options: "-Dusethreads",
+          cpanm_options:   "--force",
+          moudles: %w[
+            Plack
+            Amon2
+          ],
+        },
+      ],
+    },
   ]
 }
 ```
 
-Contributing
-------------
-TODO: (optional) If this is a public cookbook, detail the process for contributing. If this is a private cookbook, remove this section.
+## Recipes
 
-e.g.
-1. Fork the repository on Github
-2. Create a named feature branch (like `add_component_x`)
-3. Write you change
-4. Write tests for your change (if applicable)
-5. Run the tests, ensuring they all pass
-6. Submit a Pull Request using Github
+  * plenv: Installs plenv via Git
+  * plenv::install: Installs perls
+  * plenv::global: Sets a certain version of perl as globally used version
+  * plenv::install_cpanm: Installs cpanm command
+  * plenv::cpanm: Installs a perl module via cpanm
 
-License and Authors
--------------------
-Authors: TODO: List authors
+If you want to handle the installation manually, just use only `plenv` recipe and use LWRPs described below.
+
+## Resources and Providers
+
+This cookbook provides serveral LWRPs listed below:
+
+  * plenv_install: Runs `plenv install ...`
+  * plenv_global: Runs `plenv global ...`
+  * plenv_install_cpanm: Runs `plenv install-cpanm`
+  * plenv_cpanm: Installs a perl module via cpanm
+
+### plenv_install
+
+Installs perl via plenv.
+
+```ruby
+plenv_install "5.16.3" do
+  user            "kentaro"
+  install_options "-Dusethreads"
+  action          :install
+end
+```
+
+### plenv_global
+
+Set a certain version of perl as globally used version.
+
+```ruby
+plenv_global "5.16.3" do
+  user   "kentaro"
+  action :run
+end
+```
+
+### plenv_global
+
+Set a certain version of perl as globally used version.
+
+```ruby
+plenv_global "5.16.3" do
+  user   "kentaro"
+  action :run
+end
+```
+
+### plenv_install_cpanm
+
+Installs cpanm.
+
+```ruby
+plenv_install_cpanm "5.16.3" do
+  user   "kentaro"
+  action :run
+end
+```
+
+### plenv_cpanm
+
+Installs a perl module.
+
+```ruby
+plenv_cpanm "Plack" do
+  user    "kentaro"
+  options "--force --reinstall"
+  action :install
+end
+```
+
+## Contributing
+
+  1. Fork the repository on Github
+  2. Create a named feature branch (like `add_component_x`)
+  3. Write you change
+  4. Write tests for your change (if applicable)
+  5. Run the tests, ensuring they all pass
+  6. Submit a Pull Request using Github
+
+## License and Authors
+
+### License
+
+MIT License
+
+### Authors
+
+  * [Kentaro Kuribayashi](http://github.com/kentaro)
+  * [Satoshi Suzuki](https://github.com/studio3104)
