@@ -30,10 +30,10 @@ Chef cookbook for [plenv](https://metacpan.org/release/App-plenv)
     <td><tt>git://github.com/tokuhirom/plenv.git</tt></td>
   </tr>
   <tr>
-    <td><tt>['plenv']['repository']</tt></td>
+    <td><tt>['plenv']['reference']</tt></td>
     <td>String</td>
-    <td>Repository URL of plenv</td>
-    <td><tt>git://github.com/tokuhirom/plenv.git</tt></td>
+    <td>Reference to the Git repository</td>
+    <td><tt>master</tt></td>
   </tr>
   <tr>
     <td><tt>['plenv']['users']</tt></td>
