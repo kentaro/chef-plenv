@@ -11,6 +11,7 @@ action :run do
 #{node.plenv.user_home_root}/#{new_resource.user}/.plenv/bin/plenv install-cpanm &&
 #{node.plenv.user_home_root}/#{new_resource.user}/.plenv/bin/plenv rehash
 COMMAND
+      creates "#{node.plenv.user_home_root}/#{new_resource.user}/.plenv/shims/cpanm"
     end
   end
 end

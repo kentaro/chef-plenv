@@ -12,6 +12,7 @@ Vagrant::Config.run do |config|
       recipe[plenv::install]
       recipe[plenv::global]
       recipe[plenv::install_cpanm]
+      recipe[plenv::cpanm]
     ]
 
     chef.json = {
@@ -23,7 +24,12 @@ Vagrant::Config.run do |config|
             :name     =>  "vagrant",
             :versions => [
               {
-                :version => "5.16.3",
+                :version       => "5.16.3",
+                :cpanm_options => "--force --reinstall",
+                :modules       => %w[
+                  Plack
+                  Amon2
+                ],
               },
             ],
           }

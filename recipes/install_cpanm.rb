@@ -1,15 +1,13 @@
-include_recipe "plenv"
+include_recipe "plenv::install"
 
 node.plenv.users.each do |user|
-  name = user["name"] || next
+  name     = user["name"]     || next
+  versions = user["versions"] || next
 
-  unless version = user["global"]
-    versions = user["versions"]          || next
-    version  = versions.first["version"] || next
-  end
-
-  plenv_install_cpanm version do
-    user   name
-    action :run
+  versions.each do |version|
+    plenv_install_cpanm version do
+      user   name
+      action :run
+    end
   end
 end

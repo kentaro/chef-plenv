@@ -1,3 +1,5 @@
+# `users` hash can be the form below:
+
 # users: [
 #   user: {
 #     name: "kentaro",
@@ -5,16 +7,24 @@
 #       {
 #         version:         "5.16.3",
 #         install_options: "-Dusethreads",
+#         cpanm_options:   "--force",
+#         moudles: %w[
+#           Plack
+#           Amon2
+#         ],
 #       },
 #
 #       ...
 #
-#     ]
+#     ],
+#
+#     global: "5.16.3",
 #   },
 #
 #   ...
 #
 # ]
+
 default["plenv"]["users"] = []
 
 case platform
