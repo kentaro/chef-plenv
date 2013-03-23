@@ -28,16 +28,14 @@ Vagrant::Config.run do |config|
                 :version       => "5.16.2",
                 :cpanm_options => "--force --reinstall",
                 :modules       => %w[
-                  Plack
-                  Amon2
+                  Project::Libs
                 ],
               },
               {
                 :version       => "5.16.3",
                 :cpanm_options => "--force --reinstall",
                 :modules       => %w[
-                  Plack
-                  Amon2
+                  Hash::Compact
                 ],
               },
 
