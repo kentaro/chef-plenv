@@ -14,6 +14,62 @@ Chef cookbook and LWRPs for [plenv](https://metacpan.org/release/App-plenv)
   * [build-essential](http://community.opscode.com/cookbooks/build-essential)
   * [git](http://community.opscode.com/cookbooks/git)
 
+## Usage
+
+### Using Attributes and Recipes
+
+Add these recipes below into `run_list`:
+
+```
+recipe[plenv]
+recipe[plenv::install]
+recipe[plenv::global]
+recipe[plenv::install_cpanm]
+recipe[plenv::cpanm]
+```
+
+Then set attributes described later.
+
+### Using LWRPs (Recommended)
+
+Only `recipe[plenv]` should be added into your `run_list`.
+
+```
+recipe[plenv]
+```
+
+Then use LWRPs in your own recipe.
+
+```
+plenv_install "5.16.3" do
+  user   "kentaro"
+  action :install
+end
+
+plenv_global "5.16.3" do
+  user   "kentaro"
+  action :run
+end
+
+plenv_install_cpanm "5.16.3" do
+  user   "kentaro"
+  action :run
+end
+
+%w[
+  carton
+  Plack
+  Amon2
+].each do |mod|
+  plenv_cpanm mod do
+    user    "kentaro"
+    version "5.16.3"
+    options "--force"
+    action  :install
+  end
+end
+```
+
 ## Attributes
 
 <table>
