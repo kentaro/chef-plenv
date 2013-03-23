@@ -39,7 +39,7 @@ Chef cookbook for [plenv](https://metacpan.org/release/App-plenv)
     <td><tt>['plenv']['users']</tt></td>
     <td>Hash</td>
     <td>Users and information of Perls to be installed for each users</td>
-    <td><tt>See the example below</tt></td>
+    <td>See the example below</td>
   </tr>
 </table>
 
