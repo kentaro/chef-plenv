@@ -1,4 +1,4 @@
-node.plenv.users.each do |user|
+node["plenv"]["users"].each do |user|
   name     = user["name"]     || next
   versions = user["versions"] || next
 
