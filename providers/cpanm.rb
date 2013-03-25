@@ -1,5 +1,19 @@
 action :install do
   converge_by("Install #{new_resource.name} via cpanm") do
+    bash "plenv instal-cpanm" do
+      user        new_resource.user
+      environment "HOME"          => "#{node["plenv"]["user_home_root"]}/#{new_resource.user}",
+                  "PLENV_VERSION" => new_resource.version
+      path        ["#{node["plenv"]["user_home_root"]}/#{new_resource.user}/.plenv/bin"]
+
+      # `path` option seems to not work correctly...
+      code <<-COMMAND
+#{node["plenv"]["user_home_root"]}/#{new_resource.user}/.plenv/bin/plenv install-cpanm &&
+#{node["plenv"]["user_home_root"]}/#{new_resource.user}/.plenv/bin/plenv rehash
+COMMAND
+      creates "#{node["plenv"]["user_home_root"]}/#{new_resource.user}/.plenv/versions/#{new_resource.name}/bin/cpanm"
+    end
+
     bash "cpanm #{new_resource.name}" do
       user        new_resource.user
       environment "HOME" => "#{node["plenv"]["user_home_root"]}/#{new_resource.user}",

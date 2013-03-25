@@ -24,7 +24,6 @@ Add these recipes below into `run_list`:
 recipe[plenv]
 recipe[plenv::install]
 recipe[plenv::global]
-recipe[plenv::install_cpanm]
 recipe[plenv::cpanm]
 ```
 
@@ -47,11 +46,6 @@ plenv_install "5.16.3" do
 end
 
 plenv_global "5.16.3" do
-  user   "kentaro"
-  action :run
-end
-
-plenv_install_cpanm "5.16.3" do
   user   "kentaro"
   action :run
 end
@@ -151,10 +145,9 @@ plenv: {
 
 ## Recipes
 
-  * plenv::install: Installs plenv and perls
+  * plenv::install: Installs plenv (if not installed yey) and perls
   * plenv::global: Sets a certain version of perl as globally used version
-  * plenv::install_cpanm: Installs cpanm command
-  * plenv::cpanm: Installs a perl module via cpanm
+  * plenv::cpanm: Installs cpanm (if not installed yet) and a perl module via cpanm
 
 If you want to handle the installation manually, just use only `plenv` recipe and use LWRPs described below.
 
@@ -162,14 +155,13 @@ If you want to handle the installation manually, just use only `plenv` recipe an
 
 This cookbook provides serveral LWRPs listed below:
 
-  * plenv_install: Installs plenv and runs `plenv install ...`
+  * plenv_install: Installs plenv (if not installed yet) and runs `plenv install ...`
   * plenv_global: Runs `plenv global ...`
-  * plenv_install_cpanm: Runs `plenv install-cpanm`
-  * plenv_cpanm: Installs a perl module via cpanm
+  * plenv_cpanm: Installs cpanm (if not installed yet) and a perl module via cpanm
 
 ### plenv_install
 
-Installs perl via plenv.
+Installs plenv (if not installed yet) and perl via plenv.
 
 ```ruby
 plenv_install "5.16.3" do
@@ -190,20 +182,9 @@ plenv_global "5.16.3" do
 end
 ```
 
-### plenv_install_cpanm
-
-Installs cpanm.
-
-```ruby
-plenv_install_cpanm "5.16.3" do
-  user   "kentaro"
-  action :run
-end
-```
-
 ### plenv_cpanm
 
-Installs a perl module.
+Installs cpanm (if not installed yet) and a perl module.
 
 ```ruby
 plenv_cpanm "Plack" do

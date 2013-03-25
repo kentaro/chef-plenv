@@ -12,7 +12,6 @@ Vagrant::Config.run do |config|
       recipe[plenv]
       recipe[plenv::install]
       recipe[plenv::global]
-      recipe[plenv::install_cpanm]
       recipe[plenv::cpanm]
     ]
 
