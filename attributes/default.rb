@@ -28,6 +28,8 @@
 default["plenv"]["users"] = []
 default["plenv"]["repository"] = "git://github.com/tokuhirom/plenv.git"
 default["plenv"]["reference"]  = "master"
+default["plenv"]["build_repository"] = 'git://github.com/tokuhirom/Perl-Build.git'
+default["plenv"]["build_reference"]  = "master"
 
 case platform
 when "redhat", "centos", "fedora", "amazon", "scientific"
