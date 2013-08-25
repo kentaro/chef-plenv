@@ -2,9 +2,26 @@ action :install do
   converge_by("Install perl version #{new_resource.name} using plenv") do
     git "plenv" do
       user        new_resource.user
+      group       new_resource.group
       repository  node["plenv"]["repository"]
       reference   node["plenv"]["reference"]
       destination "#{node["plenv"]["user_home_root"]}/#{new_resource.user}/.plenv"
+      action      :sync
+    end
+
+    directory "#{node["plenv"]["user_home_root"]}/#{new_resource.user}/.plenv/plugins/" do
+      owner new_resource.user
+      group new_resource.group
+      mode  0755
+      action :create
+    end
+
+    git "perl-build" do
+      user        new_resource.user
+      group       new_resource.group
+      repository  node["plenv"]["build_repository"]
+      reference   node["plenv"]["build_reference"]
+      destination "#{node["plenv"]["user_home_root"]}/#{new_resource.user}/.plenv/plugins/perl-build"
       action      :sync
     end
 
@@ -12,6 +29,7 @@ action :install do
 
     bash "Add $PATH to plenv into #{user_profile}" do
       user new_resource.user
+      group new_resource.group
       code <<-COMMAND
 echo '
 export PATH="\$HOME/.plenv/bin:$PATH"
@@ -29,7 +47,8 @@ COMMAND
 
     bash "plenv install #{new_resource.name}" do
       user        new_resource.user
-      environment "HOME" => "#{node["plenv"]["user_home_root"]}/#{new_resource.user}"
+      group       new_resource.group
+      enviro      nment "HOME" => "#{node["plenv"]["user_home_root"]}/#{new_resource.user}"
       path        ["#{node["plenv"]["user_home_root"]}/#{new_resource.user}/.plenv/bin"]
 
       # `path` option seems to not work correctly...
