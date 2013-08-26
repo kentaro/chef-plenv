@@ -2,6 +2,7 @@ action :run do
   converge_by("Set perl version #{new_resource.name} being used globally") do
     bash "plenv global #{new_resource.name}" do
       user        new_resource.user
+      group       new_resource.group
       environment "HOME" => "#{node["plenv"]["user_home_root"]}/#{new_resource.user}"
       path        ["#{node["plenv"]["user_home_root"]}/#{new_resource.user}/.plenv/bin"]
 

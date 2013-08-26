@@ -1,5 +1,6 @@
 node["plenv"]["users"].each do |user|
   name     = user["name"]     || next
+  gname    = user["gname"]    || next
   versions = user["versions"] || next
 
   versions.each do |version|
@@ -10,6 +11,7 @@ node["plenv"]["users"].each do |user|
       plenv_cpanm mod do
         version version["version"]
         user    name
+        group   gname
         options opts
         action :install
       end
