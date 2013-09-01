@@ -1,6 +1,6 @@
 action :install do
   converge_by("Install #{new_resource.name} via cpanm") do
-    bash "plenv instal-cpanm" do
+    bash "plenv install-cpanm" do
       user        new_resource.user
       group       new_resource.group
       environment "HOME"          => "#{node["plenv"]["user_home_root"]}/#{new_resource.user}",
