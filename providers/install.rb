@@ -48,7 +48,7 @@ COMMAND
     bash "plenv install #{new_resource.name}" do
       user        new_resource.user
       group       new_resource.group
-      enviro      nment "HOME" => "#{node["plenv"]["user_home_root"]}/#{new_resource.user}"
+      environment "HOME" => "#{node["plenv"]["user_home_root"]}/#{new_resource.user}"
       path        ["#{node["plenv"]["user_home_root"]}/#{new_resource.user}/.plenv/bin"]
 
       # `path` option seems to not work correctly...
