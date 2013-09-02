@@ -99,7 +99,8 @@ end
 plenv: {
   users: [
     {
-      name: "kentaro",
+      name:  "kentaro",
+      gname: "stuff",
       versions: [
         {
           version:         "5.16.3",
@@ -125,6 +126,7 @@ plenv: {
 
     {
       name: "studio3104",
+      gname: "stuff",
       versions: [
         {
           # This version will be treated as global if `global` option not set
