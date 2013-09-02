@@ -1,4 +1,5 @@
 actions :install
+default_action :install if defined?(default_action)
 
 attribute :module,  :kind_of => String, :name_attribute => true
 attribute :version, :kind_of => String
