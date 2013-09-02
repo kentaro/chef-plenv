@@ -1,6 +1,6 @@
 node["plenv"]["users"].each do |user|
   name     = user["name"]     || next
-  gname    = user["gname"]    || next
+  gname    = user["group"]    || next
   versions = user["versions"] || next
 
   versions.each do |version|

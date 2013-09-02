@@ -2,7 +2,8 @@
 
 # users: [
 #   {
-#     name: "kentaro",
+#     name:  "kentaro",
+#     group: "staff",
 #     versions: [
 #       {
 #         version:         "5.16.3",
